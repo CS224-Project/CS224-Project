@@ -1,0 +1,34 @@
+\subsection{Backstrom and Leskovec}
+
+\vspace{5mm}  \noindent Backstrom and Leskovec propose an algorithm, Supervised
+Random Walks, designed to naturally combine node and edge information with
+network structure in order to provide superior link predictions and
+recommendations.
+
+\vspace{5mm}  \noindent The link prediction and recommendation problems are
+considered challenging, as real world graphs are typically very sparse, and it
+can be difficult to determine to what extent the network structure is
+responsible for linking, as opposed to node and edge features, or even external
+factors.  To effectively mingle this structural information and feature data,
+the Supervised Random Walks algorithm performs supervised learning steps using
+the edge features to bias the random walk over the network so that it will 
+visit certain nodes more often than others.  During the learning steps, the 
+edge features are used to learn the `strengths' of each edge and assign a 
+positive or negative value, such that more positive nodes are visited more 
+frequently.  In addition, for link prediction, the positive links are the ones 
+where edges will be created in the future, whereas negative links are left 
+alone.  To assign strengths using edge features, they trained an algorithm 
+using a source node and training examples where edges will be created.
+
+\vspace{5mm}  \noindent When tested on physics coauthorship and Facebook
+friendship data, Supervised Random Walks outperformed both unsupervised and
+supervised methods.  In addition, Supervised Random Walks doesn't require
+feature generation or extraction, so it is doubly impressive that it beats
+algorithms that use supervised machine learning methods with complex feature
+extraction and generation schemes to account for node and edge features.
+Overall the algorithm appears to offer significant improvements over well known
+alternatives like random walks with restarts and supervised machine learning
+techniques.
+
+
+
