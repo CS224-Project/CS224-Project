@@ -32,6 +32,24 @@ cosponsor for $B$, this signifies stronger support than if $A$ was one
 cosponsor out of $25$. Fowler constructs a weighted graph such that the weight 
 from $A$ to $B$ is for each bill where $A$ cosponsored a bill with $B$, the 
 sum of the reciprocal of the total number of cosponsors for that particular 
-bill. Using this metric, he infers closeness centrality and clusters between 
-congressman and evaluates that the most connected clusters appear to be 
-amongst the leadership positions (committee chairs and ranking members)
+bill. He then infers closeness centrality with these weighted edges (a metric 
+he calls connectedness) and clusters between congressman and evaluates that the 
+most connected clusters appear to be amongst the leadership positions 
+(committee chairs and ranking members). Further Fowler constructs a negative 
+binomial model using the centrality and connectedness measures as features to 
+predict the number of bills and amendments that are successfully passed by each 
+representative. He compares the effect sizes for each model as the ratio of the 
+predicted number of amendments passed for a person who had $1$ standard 
+deviation greater connectedness or centrality to the  number of amendments 
+passed for a person of average connectedness or centrality for each congress 
+and notes that connectedness is the metric that is better at measuring a 
+difference in effect as compared to all centrality measures. The effects sizes 
+range between $39\%$ and $59\%$.
+
+\vspace{5mm}
+\noindent
+Fowler concludes his study by trying to predict roll-call votes for a bill 
+given the connectedness of the sponsor and controlling for ideology measures 
+(Poole and Rosenthal 1997). He is able to infer a positive correlation 
+indicating that there are more 'aye' votes for a bill when the individual is 
+connected, but the effect size is small.
