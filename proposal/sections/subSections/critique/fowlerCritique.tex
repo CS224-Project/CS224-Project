@@ -2,3 +2,46 @@
 
 \vspace{5mm}
 \noindent
+Fowler's main analysis was to compare his measure of connectedness to 
+traditional centrality measures to see if it provides a better predictive 
+measure to see if a representative can get an ammendent on a bill passed and 
+if the representataive can rally more votes for a bill they cosponsored. He 
+did so by constructing a network for each congress and each house separately 
+with no links going between them and evaluating his models with congress and 
+house. We have a number of issues with this approach:
+
+\begin{itemize}
+	\item Segregated networks introduce the memoryless property to the overall 
+	social network. It could be that it is assumed that two members in a 
+	prior congress will remain connected in a futre congress, but there was no 
+	analysis to evaluate this. 
+	\item His connectedness metric is based on heuristic parameters with little 
+	support beyond intuition. Further, his bucketing strategy for only 
+	considering bills within a congress to determine an edge weight is a 
+	bias-variance tradeoff consideration that was not evaluated.
+	\item His baseline model of connectedness is very noisy, which is something 
+	he himself acknowledges (pg 459). His cutoff for whether to connect 
+	representatives is if they cosponsored a bill for one another. However, 
+	just one cosponsorship does not infer support for an individual. We would 
+	assume that consisted cosponsor support would infer a relationship. 
+	\item There was no analysis done on distinguishing between a cosponsor and 
+	a primary sponsor (someone who owns the bill).
+\end{itemize}
+
+\vspace{5mm}
+\noindent
+Further, Fowler's analysis lacked a descriptive statistics section for his 
+measurement of effect size on amendment passage. He mentions that all 
+coefficeints are significantly different from $1$ (pg 476), but he never 
+mentions at what significance and how he confirmed the significance. It does 
+not appear that he validated this model on a future congress.
+
+\vspace{5mm}
+\noindent
+Overall, Fowler's analysis is too discritized and he constructs models without 
+concern for their statistical underpinnings and methods for evaluation. We 
+would have liked to see a more temporal evolution of congressional 
+relationships. The network grows as a congress continues and some of the 
+relationships built in previous congresses clearly carry over to the next. 
+Instead of looking at a congress as a distinct $2$ year interval, we want to 
+see how the network blossoms over time.
