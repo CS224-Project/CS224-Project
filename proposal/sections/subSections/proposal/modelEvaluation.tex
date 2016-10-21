@@ -1,2 +1,19 @@
 \subsection{Model Evaluation}
 
+\textbf{Cohorts}
+
+Our base model and assumption is that partisanship mostly governs cohorts. 
+When evaluating cohorts that we develop through legislator attributes other 
+than party, we will compute and evaluate party purity as compared to cohorts 
+that are based on party. That is, we will evaluate if a cohort was formed 
+due to party alliances by examining the like features of the cohort - if the 
+predominately like feature is party, we will assume the cohort formed by party.
+
+\textbf{Bill Passage and Votes}
+
+We will assume that the party of the main bill sponsor is what governs the 
+likelihood that a bill will get passed. We will develop a variety of predictive 
+models (logistic regression, supervised random walks) that train on features 
+other than party on early bill networks. We will examine which features govern 
+the likelihood of a bill getting passed. Further, we will try to predict by 
+representative their likelihood to vote on a given bill.
