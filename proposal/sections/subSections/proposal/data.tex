@@ -1,19 +1,25 @@
 \subsection{Data}
 
-We will be using the data compiled by James Fowler on the $94^{rd}$ through 
-$110^{th}$ congress. This data includes the ICPRS id number for each 
-representative, their party, state, and the bills that they have cosponsored. 
-Further, we have data on when a bill was created, when and if it passed 
-committee hearing, and when and if it was passed into law. Further, we have 
-ideology scores on all representatives up until the BLAH congress.
+We will be using the data compiled by James Fowler on the $93^{rd}$ through
+$110^{th}$ congress. This data includes the ICPSR id number for each
+representative, the bills that they have sponsored or cosponsored, and the date
+of these events.  Further, we have data on when a bill was created and when and
+if it was passed into law.
 
-We have additional supplementary data on candidates and bills, which is compiled 
-by govTrack, which is an entity that scrapes and compiles congressional data 
-from congress.gov. Conceivably every feature of a bill, including the 
-entirety of the text, what happened to a bill during each stage of the 
-bill's life, and who voted for and against a bill, is included in this data. 
+We have additional supplementary data on candidates and bills. Much of it is
+compiled by govTrack, which is an entity that scrapes and compiles congressional
+data from congress.gov. govTrack has more granular detail about each bill beyond
+its existence and ultimate outcome, including the  entirety of the text, what
+happened to a bill during each stage of the  bill's life (such as passage
+through committee), and who voted for and against a bill. It also has more
+information about each Congressperson, including their partisanship, state or
+district, and committee memberships. We also draw upon ideology information (DW-
+Nominate scores) about each legislator.
 
-In total, this comprises approximately $1000$ representatives (nodes) and about 
-$350000$ bills (potential edges). This amounts to about $500$ Mbs of graph 
-data. In additon, the average storage size of the metadata of a bill is 
-approximately $1$ Gb.
+In total, this comprises approximately $1000$ representatives (nodes) and about
+$350000$ bills (potential edges). This amounts to about $500$ Mbs of graph
+data. In additon, the storage size of the metadata of all bills is
+approximately $1$ Gb. Depending on the method we use to generate a network,
+there is the possibility of it being quite dense; for example, if we create an
+edge when two Congresspeople cosponsor at least 10 bills together, almost a
+fifth of all possible edges are created.
