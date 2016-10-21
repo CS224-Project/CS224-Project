@@ -1,47 +1,68 @@
 \subsection{Problem}
 
-The growth of partisanship in recent years has dominated the political conversation in Washington D.C. The Democratic Party and Republican Party have grown more ideologically distinct and unwilling to compromise. 
+The growth of partisanship in recent years has dominated the political
+conversation in Washington D.C. The Democratic Party and Republican Party have
+grown more ideologically distinct and unwilling to compromise.
 
-We are interested in shedding light on how this evolution has occurred by focusing on the minutiae of governance - the network of sponsorships and cosponsorships of the thousands of bills introduced each two-year cycle, most of which never see the light of day. In particular, we seek to understand the state of working relationships in Congress, how they have evolved over time, and how these evolutions have affected legislative outcomes.
+We are interested in shedding light on how this evolution has occurred by
+focusing on the minutiae of governance - the network of sponsorships and
+cosponsorships of the thousands of bills introduced each two-year cycle, most of
+which never see the light of day. In particular, we seek to understand the state
+of working relationships in Congress, how they have evolved over time, and how
+these evolutions have affected legislative outcomes.
 
-We see a number of direct applications of graph and network analysis that can help us answer these questions. On the qualitative side, we hope to analyze different clusters and coalitions of Congressmembers over time using methods such as the Latent Multi-Group Membership Graph Model discussed above. Which features characterize these coalitions over time; do bipartisan coalitions still exist in any meaningful way? How important are the coalitions to explaining bill outcomes? Who are the power brokers in Congress that have high centrality scores in these graphs; are they senior coalition-builders or party leaders?
+We see a number of direct applications of graph and network analysis that can
+help us answer these questions. On the qualitative side, we hope to analyze
+different clusters and coalitions of Congressmembers over time using methods
+such as the Latent Multi-Group Membership Graph Model discussed above. Which
+features characterize these coalitions over time; do bipartisan coalitions still
+exist in any meaningful way? How important are the coalitions to explaining bill
+outcomes? Who are the power brokers in Congress that have high centrality scores
+in these graphs; are they senior coalition-builders or party leaders?
 
-There are a number of quantitative models we think would be appropriate as well. To better understand the dynamics of working relationships, we can consider an edge prediction problem: what features best predict whether two Congresspeople are likely to work together? We think the Supervised Page Rank approach is promising. We also think that there might be machine learning approaches to understand why bills pass as a function of their cosponsorship networks - is partisan unity starting to trump early bipartisan support?
+There are a number of quantitative models we think would be appropriate as well.
+To better understand the dynamics of working relationships, we can consider an
+edge prediction problem: what features best predict whether two Congresspeople
+are likely to work together? We think the Supervised Page Rank approach is
+promising. We also think that there might be machine learning approaches to
+understand why bills pass as a function of their cosponsorship networks - is
+partisan unity starting to trump early bipartisan support?
 
-Fowler has started down a productive path in thinking about many of these questions, but there is a lot more we can do. On the micro-level, what is the best way to represent the network of Congressional relationships in terms of undirected vs. directed, weighted vs. unweighted, and so on? More broadly, how does partisanship tie into many of the questions he addresses?
-<<<<<<< HEAD
+Fowler has started down a productive path in thinking about many of these
+questions, but there is a lot more we can do. On the micro-level, what is the
+best way to represent the network of Congressional relationships in terms of
+undirected vs. directed, weighted vs. unweighted, and so on? More broadly, how
+does partisanship tie into many of the questions he addresses?
 
-We are primarily focused on the state of relationships in congress, how 
-they evolved over time, and how those evolutions affected the state of 
-legislative outcomes. In particular, we want to investigate what constitutes a 
-relationship in congress. Fowler suggested that a relationship is a function 
-of who cosponsors bills with a legislator. We believe that this is likely the 
-case, but we are interested in using and incorporating other features into 
-the graph, such as committee membership. 
+We are primarily focused on the state of relationships in congress, how  they
+evolved over time, and how those evolutions affected the state of  legislative
+outcomes. In particular, we want to investigate what constitutes a  relationship
+in congress. Fowler suggested that a relationship is a function  of who
+cosponsors bills with a legislator. We believe that this is likely the  case,
+but we are interested in using and incorporating other features into  the graph,
+such as committee membership.
 
 We would also like to determine a method for evaluating the Congressional
 network as it grows and changes overtime. It is commonly thought that Congress
 has become more partisan as time has progressed. We want to see, given our
 relationship metric, if we can see partisanship evolving. Further, we want to
-see if beyond partisanship if representatives belong to cohorts. We are 
+see if beyond partisanship if representatives belong to cohorts. We are
 optimistic that the
 
 Fowler attempted to do this by  partitioning each Congress and examine
 centrality features to see if they  remained static or not. We would like to try
 to model this network in a  large graph
 
-Further, beyond legislative working relationship features we are interested in 
-determining the main features beyond partisanship that determines cohorts. We 
-would like to see if cohort membership identifies similar bill sponsorship and 
+Further, beyond legislative working relationship features we are interested in
+determining the main features beyond partisanship that determines cohorts. We
+would like to see if cohort membership identifies similar bill sponsorship and
 voting behavior.
 
-Partisanship has increased in Congress since the $1970$'s. We are primarily 
-interested to see to what extent partisanship has evolved overtime and affected 
+Partisanship has increased in Congress since the $1970$'s. We are primarily
+interested to see to what extent partisanship has evolved overtime and affected
 Congressional social networks and bill passage.
 
 Fowler suggested that legislative relationships are a function  of who
 cosponsors bills with a legislator. We believe that this is likely the  case,
 but we are interested in using and incorporating other features into  the graph,
-such as committee membership. 
-=======
->>>>>>> df1bf098b65b760000d8b524cba12e65f8f07d4d
+such as committee membership.
