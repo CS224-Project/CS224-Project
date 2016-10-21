@@ -12,5 +12,10 @@ function we train in the supervised step is implemented it is compatible with
 any of our combination of categorical and continuous variables, allowing us more
 leeway in the subset of features that we select to guide our link prediction.
 
-
+One thing to keep in mind is that the Supervised Random Walk model is very
+sensitive to what an edge means. Given that there are various ways for us to
+represent edges (e.g. through cosponsorships, committees, etc.), we have to be
+careful in evaluating the edges that the model predicts. That is, if we do not
+construct meaningful edges with appropriate edge features, we will get
+suboptimal results.
 

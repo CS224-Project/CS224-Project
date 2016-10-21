@@ -1,7 +1,7 @@
 \subsection{Problem}
 
 The growth of partisanship in recent years has dominated the political
-conversation in Washington D.C. The Democratic Party and Republican Party have
+conversation in Washington D.C. The Democratic and Republican Parties have
 grown more ideologically distinct and unwilling to compromise.
 
 We are interested in shedding light on how this evolution has occurred by
@@ -23,7 +23,7 @@ in these graphs; are they senior coalition-builders or party leaders?
 There are a number of quantitative models we think would be appropriate as well.
 To better understand the dynamics of working relationships, we can consider an
 edge prediction problem: what features best predict whether two Congresspeople
-are likely to work together? We think the Supervised Page Rank approach is
+are likely to work together? We think the Supervised Random Walks approach is
 promising. We also think that there might be machine learning approaches to
 understand why bills pass as a function of their cosponsorship networks - is
 partisan unity starting to trump early bipartisan support?
@@ -34,35 +34,36 @@ best way to represent the network of Congressional relationships in terms of
 undirected vs. directed, weighted vs. unweighted, and so on? More broadly, how
 does partisanship tie into many of the questions he addresses?
 
-We are primarily focused on the state of relationships in congress, how  they
-evolved over time, and how those evolutions affected the state of  legislative
-outcomes. In particular, we want to investigate what constitutes a  relationship
-in congress. Fowler suggested that a relationship is a function  of who
-cosponsors bills with a legislator. We believe that this is likely the  case,
-but we are interested in using and incorporating other features into  the graph,
-such as committee membership.
 
-We would also like to determine a method for evaluating the Congressional
-network as it grows and changes overtime. It is commonly thought that Congress
-has become more partisan as time has progressed. We want to see, given our
-relationship metric, if we can see partisanship evolving. Further, we want to
-see if beyond partisanship if representatives belong to cohorts. We are
-optimistic that the
+% We are primarily focused on the state of relationships in congress, how  they
+% evolved over time, and how those evolutions affected the state of  legislative
+% outcomes. In particular, we want to investigate what constitutes a  relationship
+% in congress. Fowler suggested that a relationship is a function  of who
+% cosponsors bills with a legislator. We believe that this is likely the  case,
+% but we are interested in using and incorporating other features into  the graph,
+% such as committee membership.
 
-Fowler attempted to do this by  partitioning each Congress and examine
-centrality features to see if they  remained static or not. We would like to try
-to model this network in a  large graph
+% We would also like to determine a method for evaluating the Congressional
+% network as it grows and changes overtime. It is commonly thought that Congress
+% has become more partisan as time has progressed. We want to see, given our
+% relationship metric, if we can see partisanship evolving. Further, we want to
+% see if beyond partisanship if representatives belong to cohorts. We are
+% optimistic that the
 
-Further, beyond legislative working relationship features we are interested in
-determining the main features beyond partisanship that determines cohorts. We
-would like to see if cohort membership identifies similar bill sponsorship and
-voting behavior.
+% Fowler attempted to do this by  partitioning each Congress and examine
+% centrality features to see if they  remained static or not. We would like to try
+% to model this network in a  large graph
 
-Partisanship has increased in Congress since the $1970$'s. We are primarily
-interested to see to what extent partisanship has evolved overtime and affected
-Congressional social networks and bill passage.
+% Further, beyond legislative working relationship features we are interested in
+% determining the main features beyond partisanship that determines cohorts. We
+% would like to see if cohort membership identifies similar bill sponsorship and
+% voting behavior.
 
-Fowler suggested that legislative relationships are a function  of who
-cosponsors bills with a legislator. We believe that this is likely the  case,
-but we are interested in using and incorporating other features into  the graph,
-such as committee membership.
+% Partisanship has increased in Congress since the $1970$'s. We are primarily
+% interested to see to what extent partisanship has evolved overtime and affected
+% Congressional social networks and bill passage.
+
+% Fowler suggested that legislative relationships are a function  of who
+% cosponsors bills with a legislator. We believe that this is likely the  case,
+% but we are interested in using and incorporating other features into  the graph,
+% such as committee membership.
