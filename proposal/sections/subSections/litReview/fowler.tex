@@ -2,13 +2,13 @@
 
 Fowler presents a graph model for the $93^{rd}$ through $108^{th}$ Congress of the United 
 States. He sought to infer the connectedness between legislators primarily 
-through a network of bill co-sponsorships. He claims that legislators 
+through a network of bill cosponsorships. He claims that legislators 
 cosponsoring each others bills is a signal for a relationship between legislators.
 
 Specifically, he organized his graph by partitioning by both Congress and house 
 (Senate Versus The House of Representatives), which created $32$ 
 [$(108 - 93 + 1) \times 2$] distinct partitions. He primarily considered how 
-connected legislators are by representing each legislator as a node and a 
+connected legislators are by representing each legislator as a node with a 
 directional edge between legislator $A$ to legislator $B$ if legislator $A$ 
 cosponsored a bill for legislator $B$. With these partitioned graphs, he 
 examines several centrality measures for each graph (i.e. degree, betweenness, 
@@ -16,7 +16,7 @@ closeness, and eigenvector) and sees how these measures track through time for
 each individual congressman. He hypothesized that the most connected 
 congressmen by centrality members should stay stable over time and evaluated 
 this by tracking the most central members and seeing if they remained the 
-most central across different congresses.
+most central across different Congresses.
 
 He continues his study by employing his own weighting metric on a directed 
 graph. He hypothesizes congressman $A$ who cosponsors a bill with congressman 
