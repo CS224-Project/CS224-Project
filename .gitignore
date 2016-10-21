@@ -94,3 +94,5 @@ ENV/
 *.fls
 *.log
 *.gz
+*.blg
+*.bbl
