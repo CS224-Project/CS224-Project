@@ -9,7 +9,7 @@ Interuniversity Consortium for Political and Social Research (ICPSR) Ids for all
 legislators for each congress, as well as an indicator matrix of which
 legislator was a sponsor of a bill and which legislator was a cosponsor of a
 bill. With this, we know who sponsored and cosponsored each bills, and thus, 
-which legislators each indivdiual Congressman cosponsored a bill with.
+which legislators each individual Congressman cosponsored a bill with.
 
 We supplement this data with additional information for each legislator, 
 including ideology scores provided by DW Nominate \textbf{CITATION}, party, 
@@ -60,22 +60,35 @@ We believe that there is a stronger signal in mutual cosponsorships. We believe,
 however, that without some thresholding on the number of cosponsorships, we may 
 get too noisy of a signal for working relationships. We think that consistent 
 cosponsorships support between legislators is the best way to smooth out and 
-detect working relationships.
+detect working relationships. We also added in the requirement that both 
+legislators must cosponsor each other's bills. This is because we want to model 
+mutual working relationships. Allowing one-way cosponsorships allows for 
+relationships where party and committee leaders force the rank and file 
+legislators to cosponsor their bills.
 
-\begin{itemize}
-	\item Either $A$ voted for a bill sponsored by $B$ or vice versa.
-	\item Either $A$ cosponsored a bill sponsored by $B$ or vice versa.
+We constructed networks with varying levels of mutual cosponship thresholds and
+examined their edge densities. We wanted had two goals when searching for a
+threshold. We wanted to hone in on a reasonable average number of working
+relationships proportional to the size of the network, and we wanted the density
+to be on the same magnitude across all congresses. For the House, we thought 
+that on average, having about $20$ working relationships (relative to the usual 
+$435$ members of the house) would be ideal. This would corresponds to an average 
+density of approximately $0.05$. For the senate, this would be about $0.1$ 
+average density.
 
+From the plots of density, we see that we achieve the desired average density 
+with minimal spread between congresses for the house at \textbf{K = BLAH} and 
+for the senate at \textbf{K = BLAH}.
 
-threshold k = 5 shared cosponsorships condition that must be at least one 
-cosponsorship in 1 direction.
+\textbf{Final Networks}
 
-With this data, we constructed a bipartite graph between legislators and
-bills, where an edge represents a legislator either sponsoring or cosponsoring
-the bill. We keep note of which legislator was the main sponsor of a bill. We 
-collapse the bipartite graph  We can then collapse this bipartite graph on the bills and effectively
-create a network of legislators where an edge between legislator $A$ and $B$
-represents that either $A$ cosponsored one of $B$'s bills, or vice versa, or
-they both cosponsored each other's bills.
+We implement this methodology across all congresses. Since the Senate and the 
+House cannot cosponsor each others bills, we construct disjoint graphs for 
+the Senate and House. Also, since we are looking at the evolution of communities 
+over time, we construct these networks separately for each congress.
 
+\subsection{Data Manipulations}
 
+We manually changed some of the Fowler unique identifiers to match those in  DW
+Nominate and GovTrack. Most of these changes occured when a Legislator  changes
+party. For a detailed list of changes, please refer to our github repository.
