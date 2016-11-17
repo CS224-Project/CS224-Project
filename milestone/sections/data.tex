@@ -1,0 +1,81 @@
+\section{Data and Methodology}
+
+\subsection{Data Overview}
+
+Our primary source of data was aggregated by James Fowler \textbf{CITATION}.
+Fowler developed several disjoint of House and Senate social networks for the
+$93^{rd}$ through the $110^{th}$ Congress. His data contains the names and
+Interuniversity Consortium for Political and Social Research (ICPSR) Ids for all
+legislators for each congress, as well as an indicator matrix of which
+legislator was a sponsor of a bill and which legislator was a cosponsor of a
+bill. With this, we know who sponsored and cosponsored each bills, and thus, 
+which legislators each indivdiual Congressman cosponsored a bill with.
+
+We supplement this data with additional information for each legislator, 
+including ideology scores provided by DW Nominate \textbf{CITATION}, party, 
+age, sex, and region of the United States. Data sources include DW Nominate, 
+GovTrack, and \textbf{BLAH}.
+
+\subsection{Constructing the Network}
+
+The questions we are primarily concerned about answering in this paper relate 
+to how can we model working and collaborative relationships with legislators. 
+We want to achieve this by creating a network between legislators where a 
+connection represents a collaborative working relationship. We have a number of 
+options to construct the network. We ultimately chose to define a working 
+relationship between Congressman $A$ and $B$ if they meet the following 
+conditions:
+
+\begin{itemize}
+	\item In total there exists at least $5$ cosponsorships between $A$ and $B$ 
+	on which either $A$ or $B$ was the primary sponsor.
+	\item $A$ needs to cosponsor at least one of $B$'s bills and vice versa.
+\end{itemize}
+
+We discuss our choice of this network over others in the following sections.
+
+\textbf{Cosponsorship Versus Role Call Votes}
+
+We can infer that a cosponsorship is almost equivalent to voting for a bill. If 
+you are willing to cosponsor a bill then you will most likely vote for the bill. 
+We decided against using roll call votes as our measure of collaboration for 
+the following reasons:
+
+\begin{itemize}
+	\item Cosponsorship contains support signaling. It is a method legislators 
+	use to signal to the rest of Congress that they support a bill.
+	\item Voting for a bill does not necessarily imply a collaborative working 
+	relationship. There are reasons to vote for a bill that goes beyond a 
+	working relationship, including voting for a partisan issue or voting for 
+	an issue that affects your constituents.
+\end{itemize}
+
+In short, we believe that embedded in roll call votes there is a signal of a 
+working relationship, but we believe that the signal is obscured by noise 
+relating to other voting reasons.
+
+\textbf{Why 5 Mutual Cosponsorships}
+
+We believe that there is a stronger signal in mutual cosponsorships. We believe, 
+however, that without some thresholding on the number of cosponsorships, we may 
+get too noisy of a signal for working relationships. We think that consistent 
+cosponsorships support between legislators is the best way to smooth out and 
+detect working relationships.
+
+\begin{itemize}
+	\item Either $A$ voted for a bill sponsored by $B$ or vice versa.
+	\item Either $A$ cosponsored a bill sponsored by $B$ or vice versa.
+
+
+threshold k = 5 shared cosponsorships condition that must be at least one 
+cosponsorship in 1 direction.
+
+With this data, we constructed a bipartite graph between legislators and
+bills, where an edge represents a legislator either sponsoring or cosponsoring
+the bill. We keep note of which legislator was the main sponsor of a bill. We 
+collapse the bipartite graph  We can then collapse this bipartite graph on the bills and effectively
+create a network of legislators where an edge between legislator $A$ and $B$
+represents that either $A$ cosponsored one of $B$'s bills, or vice versa, or
+they both cosponsored each other's bills.
+
+
