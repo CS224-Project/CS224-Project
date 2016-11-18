@@ -1,0 +1,37 @@
+\section{CESNA Analysis}
+
+\subsection{Party Purity Analysis}
+
+This analysis tries to estimate how the community's purity in relation to party
+has changed over time. To compute purity for a binary feature, we first
+determine the proportion of members in a community that exhibit that feature. We
+will call this proportion $p$. The purity of a community is then defined as $p
+\times (1 - p)$. Note that $p$ ranges from $0$ to $1$. A value of $p = 1$ or $p
+= 0$ corresponds to a community comprised of only one type of feature, and
+results in a purity of $0$. We note that the largest the purity criterion can be
+is when $p = 0.5$, then purity equals $0.25$. Then, our community is very
+`impure`.
+
+We proceed with this analysis by first computing the purity of of each community
+in each congress. We then compute the average purity between each community
+within each congress. We then examine the trend of average community party
+purity as it differs from congress to congress.
+
+We hypothesize that working relationships in Congress have become more strenuous
+over time as Congress has become more partisan. If this were true, then we would
+expect to see a decrease over time in community party purity as Republicans and
+Democrats mutually refuse to work with the other party.
+
+\begin{figure}[h!]
+    \includegraphics[scale=0.5]{charts/avePurity.png}
+\end{figure}
+
+We notice first that the senate does not appear to have an overall trend up or
+down. It does, however, have a very sharp decline for the 104 Congress. Recall
+that this was the Congress that saw the very sharp decline in average degree.
+
+The House plot, on the other hand, appears to have a very mild decline in
+average  purity. Given that we have not finalized our communities or performed
+perturbation analysis, and the fact that the decline is so mild, we would not
+argue that this is evidence of a more partisan House. We will re-plot this after 
+we obtain definitively stable communities.
