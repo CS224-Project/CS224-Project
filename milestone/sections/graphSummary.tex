@@ -1,0 +1,37 @@
+\section{Graph Summary Stats}
+
+We start by visualizing some of the working relationship graphs. The two examples we choose are from the Senate (which has fewer nodes) and depict a high-density Congressional session (101st) and a low-density session (104th).
+
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[h]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{charts/sen_l_color.png}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[h]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{charts/sen_h_color.png}
+  \end{minipage}
+\end{figure}
+
+One thing that is immediately noticeable is the party clustering. There is a core of party loyalists in each graph who are densely connected to one another. Nestled among the party loyalists are a couple members from the other party. Then there are members who work closely with members from both parties who have less dense subnetworks but many edges to disparate parts of the graph. 
+
+There are also noticeable authority figures in both parties who have strong working relationships with numerous others. On the other end of the spectrum are a handful of Senators with no strong working relationships at all; these members appear to be cashing their paycheck and not doing much legislating.
+
+The two graphs side-by-side also illustrate just how much things can change between Congressional sessions. The definition of an edge is the same in both graphs but the number of edges created is starkly different between the two Congressional sessions depicted. The brutal and combaitve 104th Congress, culminating in a government shutdown, saw substantially less legislative work done and working relationships developed then the 101st just a handful of years earlier.
+
+\includegraphics[width=\textwidth]{avgdegree.png}
+
+Going along with this last observation, we can visualize the average degree of the working relationship graph across time. After the first few Congresses, which as explained had different rules for cosponsorships, we see a burst of legislative activity and relationships between the 98th and 102nd Congress under Ronald Reagan and George H.W. Bush before a decline and recovery late in the Bill Clinton years and under George W. Bush.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[h]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{charts/house_deg_dist.png}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[h]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{charts/senate_deg_dist.png}
+  \end{minipage}
+\end{figure}
+
+Building on the point about party authorities, meanwhile, we see a degree distribution that mirrors the well-known power law in both the House and the Senate. Most members have only a handful of close working relationships but there is a long tail of legislators who work extensively with a substantial fraction of the entire body. Understanding the work of these high-degree legislators is important to understanding the work of Congress as a whole.
