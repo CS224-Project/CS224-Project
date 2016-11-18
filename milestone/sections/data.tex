@@ -2,7 +2,7 @@
 
 \subsection{Data Overview}
 
-Our primary source of data was aggregated by James Fowler \textbf{CITATION}.
+Our primary source of data was aggregated by James Fowler~\cite{Fowler}.
 Fowler developed several disjoint of House and Senate social networks for the
 $93^{rd}$ through the $110^{th}$ Congress. His data contains the names and
 Interuniversity Consortium for Political and Social Research (ICPSR) Ids for all
@@ -12,9 +12,9 @@ bill. With this, we know who sponsored and cosponsored each bills, and thus,
 which legislators each individual Congressman cosponsored a bill with.
 
 We supplement this data with additional information for each legislator, 
-including ideology scores provided by DW Nominate \textbf{CITATION}, party, 
-age, sex, and region of the United States. Data sources include DW Nominate, 
-GovTrack, and \textbf{BLAH}.
+including ideology scores provided by DW Nominate~\cite{DW-NOMINATE}, party, 
+age, sex, and region of the United States. Data sources include DW-NOMINATE and 
+GovTrack~\cite{GovTrack}.
 
 \subsection{Constructing the Network}
 
@@ -27,14 +27,20 @@ relationship between Congressman $A$ and $B$ if they meet the following
 conditions:
 
 \begin{itemize}
-	\item In total there exists at least $5$ cosponsorships between $A$ and $B$ 
-	on which either $A$ or $B$ was the primary sponsor.
+	\item For the House, there exists at least $4$ cosponsorships between $A$ and $B$ 
+	on which either $A$ or $B$ was the primary sponsor. For the Senate, there 
+	needs to be at least $12$.
 	\item $A$ needs to cosponsor at least one of $B$'s bills and vice versa.
 \end{itemize}
 
 We discuss our choice of this network over others in the following sections.
 
+\vspace{3mm}
+
+\noindent
 \textbf{Cosponsorship Versus Role Call Votes}
+
+\vspace{3mm}
 
 We can infer that a cosponsorship is almost equivalent to voting for a bill. If 
 you are willing to cosponsor a bill then you will most likely vote for the bill. 
@@ -54,7 +60,12 @@ In short, we believe that embedded in roll call votes there is a signal of a
 working relationship, but we believe that the signal is obscured by noise 
 relating to other voting reasons.
 
+\vspace{3mm}
+
+\noindent
 \textbf{Why 5 Mutual Cosponsorships}
+
+\vspace{3mm}
 
 We believe that there is a stronger signal in mutual cosponsorships. We believe, 
 however, that without some thresholding on the number of cosponsorships, we may 
@@ -76,11 +87,24 @@ $435$ members of the house) would be ideal. This would corresponds to an average
 density of approximately $0.05$. For the senate, this would be about $0.1$ 
 average density.
 
-From the plots of density, we see that we achieve the desired average density 
-with minimal spread between congresses for the house at \textbf{K = BLAH} and 
-for the senate at \textbf{K = BLAH}.
+\begin{figure}[h!]
+    \includegraphics[scale=0.25]{charts/housedensity1.png}
+\end{figure}
 
+\begin{figure}[h!]
+    \includegraphics[scale=0.25]{charts/senatedensity1.png}
+\end{figure}
+
+From the plots of density, we see that we achieve the desired average density 
+with minimal spread between congresses for the house at $4$ and 
+for the senate at $12$.
+
+\vspace{3mm}
+
+\noindent
 \textbf{Final Networks}
+
+\vspace{3mm}
 
 We implement this methodology across all congresses. Since the Senate and the 
 House cannot cosponsor each others bills, we construct disjoint graphs for 
@@ -92,3 +116,12 @@ over time, we construct these networks separately for each congress.
 We manually changed some of the Fowler unique identifiers to match those in  DW
 Nominate and GovTrack. Most of these changes occured when a Legislator  changes
 party. For a detailed list of changes, please refer to our github repository.
+
+\subsection{Change In Law}
+
+Starting with the $98^{th}$ Congress, a law passed which allowed a bill to have
+more than $25$ legislators cosponsor it at a time. As a result, legislators
+started to cosponsor more bills than usual. We can see this behavior manifest
+itself in the uptick in average network degrees in congresses after the
+$97^{th}$. As such, the behavior and the number of communities we receive from
+before the $98^{th}$ congress appear to be fundamentally different.
