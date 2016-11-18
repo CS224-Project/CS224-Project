@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[10pt,twocolumn]{article}
 \usepackage{titling}
 \usepackage{listings}
 \usepackage{amsmath}
@@ -12,9 +12,16 @@
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \newcommand{\Tau}{\mathrm{T}}
 \def\Tau{{\rm T}}
-\setlength\parindent{0pt}
-\setlength{\parskip}{\baselineskip}
+% \setlength\parindent{0pt}
+% \setlength{\parskip}{\baselineskip}
 \usepackage[margin=1.0in]{geometry}
+
+\usepackage{titlesec}
+% \titlespacing*{\section}{0pt}{1.0\baselineskip}{\baselineskip}
+
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
 
 \setlength{\droptitle}{-20 mm}
 \title{Analyzing The Network of Congress \\
@@ -26,7 +33,13 @@ CS224W Project Milestone}
 \maketitle
 
 \input{sections/abstract.tex}
+\input{sections/relatedWork.tex}
 \input{sections/data.tex}
+\input{sections/cesna.tex}
+\input{sections/cesnaAnalysis.tex}
+\input{sections/predictingBills.tex}
+
+
 
 {\small
 \bibliographystyle{plain}
