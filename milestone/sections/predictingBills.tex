@@ -1,0 +1,23 @@
+\section{Bill Passage}
+
+The web of working relationships in Congress is also interesting because of the effect it may have on legislative outcomes. A basic model of legislation, along the lines of the Median Voter Theorem (Black, Duncan (1948). ``On the Rationale of Group Decision-making". Journal of Political Economy. 56: 23–34. doi:10.1086/256633), would say that legislation is most likely to pass if its ideological content matches most closely the median ideology of legislators. A more sophisticated take would include the effects of party such as the level of support by the majority party and party leaders, who can exert control on which amendments or bills will come up for a vote.
+
+But there are several reasons to believe that there are factors beyond just party and ideology (as defined by DW-NOMINATE) that would determine the success of a piece of legislation. For one, relatively few bills are passed relative the the amount introduced, so there is the question of which bills will be prioritized. Additionally, bills are often technical in nature without a major ideological component or are compromises between various factions. Finally, bills themselves might be subjects of larger compromises, in which legislators vote for each others' bills in what is known as `logrolling' (Schwartz, Thomas (1977). ``Collection of Issues and Vote Trading". The American Political Science Review. 71 (3): 999–1010. doi:10.2307/1960103). 
+
+Each of these factors can be influenced by considering the network of working relationships. Congresspeople with more numerous, important, and strategic relationships may be more likely to get the bills they write or cosponsor passed, even holding fixed party and ideology variables.
+
+In many ways, this is similar to the traditional problems of community growth in the network literature. We are interested in whether the early cosponsor network of a bill will grow to such a point that the bill is able to pass or whether it will remain small and die off at the end of the Congressional cycle. One way to tackle this problem would be trying to predict who will join in as cosponsors, which is an edge prediction problem. Another, the way we pursue here, is to see which bills end up passing, a traditional binary machine learning problem. Both are interesting problems from an intellectual standpoint and we focus on the latter using the reasoning that bill outcomes are ultimately more interesting from a political standpoint than `intermediate' successes like marginal cosponsors.
+
+Backstrom et al. (BACKSTROM CITE) identify several features of early networks that they see as important for growth. In particular, they find a lot of significance in the number of nodes that have edges to someone in the early network, which they call the `fringe'. Additionally, they look at features related to clustering in the early network, such as the ratio of closed to open triads which is negatively correlated with growth. Finally, they look at the `activity' of the initial group, which in our context might include the legislative productivity of the early cosponsor networks.
+
+Our final goal, then, is a predictive model for bill passage based on the sponsor and early cosponsors of a bill. Predictive accuracy is of course important but it's really the variable importance that is of broader interest - for example, do network features matter and how has the importance of party and ideology changed over time relative to network features. Possible features include
+\begin{itemize}
+	\item party of sponsor
+	\item number of cosponsors
+	\item partisan makeup of cosponsors (pct Democrat)
+	\item ideological makeup of network (mean, variance)
+	\item number of bills written by sponsor
+	\item degree of sponsor in network
+	\item number of edges leaving the cut of cosponsors
+	\item size of connected component of sponsor (graph is NOT connected)
+\end{itemize}
