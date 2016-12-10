@@ -1,0 +1,44 @@
+\subsection{Community Sensitivity and Stability}
+
+Currently our analysis is done without community sensitivity. We allow CESNA to
+pick the number of communities and we performed our preliminary analysis on
+these communities. In our final report we plan to do more extensive testing on
+the stability of the communities that we develop.
+
+The CESNA algorithm and community assignment is dependent on several things: the
+number of total communities that we wish to create, the edges distribution in
+the graph, and the attribute values within the graph~\cite{Tzerpos}. When we analyze community 
+stability, we will perturb each individual and jointly.
+
+\textbf{Edge Perturbations}
+
+For each community in a given Congress, we will detect how robust it is to edge 
+deletions. That is, for each edge within a community, we will randomly delete 
+them it with varying probability and rerun CESNA to see how the resulting 
+communities compare to the original. We will use Jaccard similarity between 
+communities to define how similar communities are. A robust community will be 
+one that maintains a high Jaccard similarity with reasonably low probability of 
+random edge deletion. Communities that completely dissolve with small edge 
+probability of edge deletions will be deemed Unstable.
+
+\textbf{Feature Perturbations}
+
+CESNA Only takes in discrete features. However, some of the underlying features 
+(e.g. age and ideology) are really discretized continuous variables. As such, 
+our perturbation strategy for variable perturbation depends on the type of 
+variable.
+
+For underlying continuous variables, we will add random normal noise to the
+variables. The average noise will be proportional to that feature's sample
+average. We will vary the standard deviation for sensitivity purposes. After
+perturbations, we will measure the community's stability by computing the
+Jaccard similarity for each community. Again, communities with low Jaccard
+similarities will be considered unstable, and we will then reduce the number of
+communities that we detect.
+
+For genuinely discrete variables (such as sex), we will employ a strategy
+similar to edge perturbations. Except, instead of randomly deleting edges, we
+will randomly switch features for all individuals within the cluster. We will
+use Jaccard similarity to gage how stable a community is, imputing that low 
+Jaccard similarity means an unstable community, thus necessitating lowering 
+the number of communities that we use.

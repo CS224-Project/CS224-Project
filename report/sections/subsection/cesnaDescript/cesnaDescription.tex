@@ -1,0 +1,25 @@
+\subsection{CESNA Clustering Description}
+
+We are interested in analyzing clusters of legislators based on their network of
+working relationships. Crucially, we are particularly important in how these
+clusters relate to the attributes of the legislators. A promising approach is
+laid out in Yang et al.~\cite{Yang}, who describe an algorithm for finding
+Communities from Edge Structure and Node Attributes, which they call CESNA.
+CESNA incorporates node features and edge structure to find communities instead
+of just relying on one or the other. It explicitly computes the importance of
+different node features in forming each cluster. Additionally, it allows for
+overlapping and nested communities, which is one of the key features of our
+dataset. Legislators are likely to have distinct communities of working
+relationships with their regional peers, ideological peers, committee peers, and
+of course party peers.
+
+In particular, we make use of the authors' C++ implementation and feed in
+details of our own network. As is necessary for the models, we binarize all of
+our variables. This means that categorical variables like region are split into
+distinct dummy variables and continuous variables like ideology are split into
+buckets. We choose to split each ideological dimension into five groups: left,
+center-left, moderate, center-right, and right, each of which roughly contain a
+fifth of the members. The motivation behind selecting an odd number of groups is
+to allow for a moderate group that straddles the DW-NOMINATE center point of 0.
+The final list of variables, appropriately binarized, are party, ideology,
+region, committee, gender, and age.
