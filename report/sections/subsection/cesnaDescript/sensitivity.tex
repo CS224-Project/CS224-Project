@@ -1,44 +1,73 @@
 \subsection{Community Sensitivity and Stability}
 
-Currently our analysis is done without community sensitivity. We allow CESNA to
-pick the number of communities and we performed our preliminary analysis on
-these communities. In our final report we plan to do more extensive testing on
-the stability of the communities that we develop.
+It is important that the clusters we generate be meaningful and stable given the
+degrees of freedom present in constructing clusters, edges, and
+features~\cite{Tzerpos}. In particular, in our context we have direct control
+over the number of clusters we wish to generate using the CESNA algorithm and
+implicit control over the edges and features due to the decision rules we used:
+edges are formed only if the number of reciprocal sponsorship-cosponsorship
+pairs meets a specific threshold in a given term and some features are converted
+from continuous variables to discrete variables using cutoffs. There are also a
+large number of features and so some opportunity for `overfitting' the clusters
+to noise.
 
-The CESNA algorithm and community assignment is dependent on several things: the
-number of total communities that we wish to create, the edges distribution in
-the graph, and the attribute values within the graph~\cite{Tzerpos}. When we analyze community 
-stability, we will perturb each individual and jointly.
+To combat all of these problems, we employ the following strategy to validate our clusters on each Congress:
+\begin{itemize}
+	\item Run CESNA to create 20 communities, the maximum of its default search space.
+	\item Repeatedly perturb the edges and features of the network (described below) and recompute 20 CESNA communities for each perturbation.
+	\item Use the Hungarian matching algorithm (described below) to pair up the communities in the original and each perturbed graph and compute the Jaccard similarity score associated with each pair.
+	\item Prune the original clusters that changed too much (i.e. had average similarity scores under \textbf{FILL IN CUTOFF}).
+\end{itemize}
+
+The remaining clusters have proven stable to numerous minor alterations in the
+graph and so are more likely to represent robust communities of working
+relationships.
 
 \textbf{Edge Perturbations}
-
-For each community in a given Congress, we will detect how robust it is to edge 
+[HENRY - FIX THIS SECTION]
+\textit{For each community in a given Congress, we will detect how robust it is to edge 
 deletions. That is, for each edge within a community, we will randomly delete 
 them it with varying probability and rerun CESNA to see how the resulting 
 communities compare to the original. We will use Jaccard similarity between 
 communities to define how similar communities are. A robust community will be 
 one that maintains a high Jaccard similarity with reasonably low probability of 
 random edge deletion. Communities that completely dissolve with small edge 
-probability of edge deletions will be deemed Unstable.
+probability of edge deletions will be deemed Unstable.}
 
 \textbf{Feature Perturbations}
-
-CESNA Only takes in discrete features. However, some of the underlying features 
+[HENRY - FIX THIS SECTION]
+\textit{CESNA Only takes in discrete features. However, some of the underlying features 
 (e.g. age and ideology) are really discretized continuous variables. As such, 
 our perturbation strategy for variable perturbation depends on the type of 
-variable.
+variable.}
 
-For underlying continuous variables, we will add random normal noise to the
+\textit{For underlying continuous variables, we will add random normal noise to the
 variables. The average noise will be proportional to that feature's sample
 average. We will vary the standard deviation for sensitivity purposes. After
 perturbations, we will measure the community's stability by computing the
 Jaccard similarity for each community. Again, communities with low Jaccard
 similarities will be considered unstable, and we will then reduce the number of
-communities that we detect.
+communities that we detect.}
 
-For genuinely discrete variables (such as sex), we will employ a strategy
+\textit{For genuinely discrete variables (such as sex), we will employ a strategy
 similar to edge perturbations. Except, instead of randomly deleting edges, we
 will randomly switch features for all individuals within the cluster. We will
 use Jaccard similarity to gage how stable a community is, imputing that low 
 Jaccard similarity means an unstable community, thus necessitating lowering 
-the number of communities that we use.
+the number of communities that we use.}
+
+\textbf{Cluster Similarity and Pruning}
+
+Given two sets of clusters, the original and the perturbed, we wish to find a
+1-to-1 matching such that the most similar clusters are paired up. The way we
+use this is with the Hungarian Matching algorithm, which can be used to find a
+maximum weight perfect matching on a complete bipartite graph. Here, the nodes
+in the graph are the two sets of clusters and the weight on the edge between
+original cluster $i$ and perturbed cluster $j$ is the Jaccard similarity
+(intersection over union) between $i$ and $j$.
+
+Upon finding the perfect matching, we assign each original cluster the weight of
+its edge in the perfect matching; that is, the Jaccard overlap with its similar
+cluster in the perturbed results. We can then average the similarity score of
+each original cluster across 100 perturbations to get a stability score, which
+we use to make our pruning decisions.

@@ -1,21 +1,47 @@
 \section{Abstract}
 
-The United States Congress is a rich social network where each legislator
-interacts with their peers through committees, house leadership positions, and
-bill co-sponsorships and amendments. Through the lens of growing partisanship,
-we investigate qualitative measures of the network, including the difference in
-congressional networks using different relationship features, how legislators
-are clustered beyond party lines and what features are common in those clusters.
-We investiage how these clusters and communities evolve over time through
-different congresses and evaluate how partisianship has affected these
-communities and working relationships in Congress.
+Growing partisan polarization has dominated the conversation about Congress in
+recent years. While there have always been issue differences between the major
+parties, these differences have grown and calcified along multiple
+dimensions~\cite{Layman}. Quantitative metrics based on roll-call votes that
+label legislators as points in multi-dimensional ideological space have borne
+out the story of major polarization~\cite{Poole}.
 
-We achieved this by first building a cosponsorship network of the $93^{rd}$
-through $110^{th}$ Congress and supplemented the network with information about
-each Congressman (node attributes). We then implemented Community Detection in
-Networks with Node Attributes (CESNA) on the network and tracked communities and
-community attributes over time, noting how important partisianship was in
-defining each community.
+At the same time, the United States Congress is a rich social network where each
+legislator interacts with their peers through committees, house leadership
+positions, and bill co-sponsorships and amendments. The extent to which these
+relationships have changed in recent years is not as well understood as the
+changes in ideology. If ideologically distinct groups are still able to work
+together on crafting bills, and it turns out that those working relationships
+are important in legislative outcomes beyond the ideological content of bills,
+then partisan polarization in roll-call voting might be less worrying than it
+appears.
 
-Further, we investigate to what extent early features within the same networks
-can predict the success of a bill being passed into law.
+We build out a network using bill sponsorship-cosponsorship relationships to
+track the state of working relationships over time and the nature of legislative
+deal-making. Legislators may vote together relatively infrequently but still
+find some areas of common ground and work together on bills in those areas. They
+may also form communities of multiple legislators and influence which bills get
+taken up by committee and ultimately succeed. These and many more features of
+the working relationship network can give more fine-grained insight into
+Congressional activity, and how it has changed over time, than just the final
+votes.
+
+In particular, we build a cosponsorship network of the $93^{rd}$ through
+$110^{th}$ Congress and supplement the network with information about each
+Congressman (node attributes). From this we are able to track broad patterns of
+how Congress has changed over time such as how many and and what kind of working
+relationships exist in Congress.
+
+Next, we build stable clusters in the network that represent real-life
+communities of legislators based on their bill-writing activity. To do this, we
+implement the Community Detection in Networks with Node Attributes (CESNA)
+algorithm on the network and track communities and community attributes over
+time, noting how important partisianship was in defining each community.
+
+Finally, we investigate to what extent the sponsor and early cosponsors of a
+bill can provide insight on the chances of a bill succeeding. Here, we draw upon
+not just various features of the working relationship network but also data from
+multiple sources characterizing the demographics and prominence of different
+legislators. We are interested not just in how predictable bill outcomes are but
+on what factors matter over time.

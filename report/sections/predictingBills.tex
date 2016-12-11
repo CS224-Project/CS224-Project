@@ -1,13 +1,100 @@
 \section{Bill Passage}
 
-The web of working relationships in Congress is also interesting because of the effect it may have on legislative outcomes. A basic model of legislation, along the lines of the Median Voter Theorem~\cite{Black}, would say that legislation is most likely to pass if its ideological content matches most closely the median ideology of legislators. A more sophisticated take would include the effects of party such as the level of support by the majority party and party leaders, who can exert control on which amendments or bills will come up for a vote.
+The web of working relationships in Congress is also interesting because of the
+effect it may have on legislative outcomes. A basic model of legislation, along
+the lines of the Median Voter Theorem~\cite{Black}, would say that legislation
+is most likely to pass if its ideological content matches most closely the
+median ideology of legislators. A more sophisticated take would include the
+effects of party such as the level of support by the majority party and party
+leaders, who can exert control on which amendments or bills will come up for a
+vote.
 
-But there are several reasons to believe that there are factors beyond just party and ideology (as defined by DW-NOMINATE) that would determine the success of a piece of legislation. For one, relatively few bills are passed relative the the amount introduced, so there is the question of which bills will be prioritized. Additionally, bills are often technical in nature without a major ideological component or are compromises between various factions. Finally, bills themselves might be subjects of larger compromises, in which legislators vote for each others' bills in what is known as `logrolling'~\cite{Schwartz}. 
+But there are several reasons to believe that there are factors beyond just
+party and ideology (as defined by DW-NOMINATE) that would determine the success
+of a piece of legislation. For one, relatively few bills are passed relative the
+the amount introduced, so there is the question of which bills will be
+prioritized. Additionally, bills are often technical in nature without a major
+ideological component or are compromises between various factions. Finally,
+bills themselves might be subjects of larger compromises, in which legislators
+vote for each others' bills in what is known as `logrolling'~\cite{Schwartz}.
 
-Each of these factors can be influenced by considering the network of working relationships. Congresspeople with more numerous, important, and strategic relationships may be more likely to get the bills they write or cosponsor passed, even holding fixed party and ideology variables.
+Each of these factors can be influenced by considering the network of working
+relationships. Congresspeople with more numerous, important, and strategic
+relationships may be more likely to get the bills they write or cosponsor
+passed, even holding fixed party and ideology variables.
 
-In many ways, this is similar to the traditional problems of community growth in the network literature. We are interested in whether the early cosponsor network of a bill will grow to such a point that the bill is able to pass or whether it will remain small and die off at the end of the Congressional cycle. One way to tackle this problem would be trying to predict who will join in as cosponsors, which is an edge prediction problem. Another, the way we pursue here, is to see which bills end up passing, a traditional binary machine learning problem. Both are interesting problems from an intellectual standpoint and we focus on the latter using the reasoning that bill outcomes are ultimately more interesting from a political standpoint than `intermediate' successes like marginal cosponsors.
+In many ways, this is similar to the question of community growth in the network
+literature. The success of a bill is analagous to the spreading of the early
+community formed by the early cosponsors to cover a majority of Congress.
+Backstrom et al.~\cite{Backstrom} identify several features of early networks
+that they see as important for growth. In particular, they find a lot of
+significance in the number of nodes that have edges to someone in the early
+network, which they call the `fringe'. Additionally, they look at features
+related to clustering in the early network, such as the ratio of closed to open
+triads which is negatively correlated with growth. Finally, they look at the
+`activity' of the initial group, which in our context might include the
+legislative productivity of the early cosponsor networks.
 
-Backstrom et al.~\cite{Backstrom} identify several features of early networks that they see as important for growth. In particular, they find a lot of significance in the number of nodes that have edges to someone in the early network, which they call the `fringe'. Additionally, they look at features related to clustering in the early network, such as the ratio of closed to open triads which is negatively correlated with growth. Finally, they look at the `activity' of the initial group, which in our context might include the legislative productivity of the early cosponsor networks.
+\subsection{Features}
 
-Our final goal, then, is a predictive model for bill passage based on the sponsor and early cosponsors of a bill. Predictive accuracy is of course important but it's really the variable importance that is of broader interest - for example, do network features matter and how has the importance of party and ideology changed over time relative to network features. Possible features include the party of the sponsor, the number of early cosponsors, the partisan makeup of the cosponsors, the ideological makeup of the network, the number of bills written by the sponsor, the degree of the sponsor in the network, and the number of edges leaving the cut of cosponsors.
+We split our feature set into \textit{demographic} features, \textit{visibility}
+features, and \textit{network} features over the early cosponsorship network. In
+the case where a bill does not have any cosponsors, the features are computed
+for the sponsor alone. To focus on the main backers and supporters of a bill and
+to avoid including cosponsors who join onto a bill when it looks like it will
+pass, we limit the pool of considered cosponsors to only those who sign on in
+the first 30 days after the bill was introduced.
+
+The demographic features most prominently include party and ideology, and
+include age, gender, and region as well. These features are meant to capture the
+palatability of the bill to various factions. If a bill's chance of success
+really does depend primarily on its content, we would expect these demographic
+variables to be the important ones. In particular, we consider
+\begin{itemize}
+	\item whether sponsor is from majority party
+	\item party impurity of early cosponsors
+	\item ideology of sponsor
+	\item mean ideology of early cosponsors
+	\item variance of ideology of early cosponsors
+	\item regional diversity of early cosponsors
+	\item gender impurity of early cosponsors
+	\item variance in age of early cosponsors
+\end{itemize}
+
+The visibility features are meant to capture how prominent or well-known a
+legislator is in Congress. In some ways, these can be thought of as a poor man's
+version of the network features, which explicitly capture how embedded a
+legislator is in the Congressional network. The idea is that more visible
+legislators will have greater success in attracting support for their
+initiatives. All variables that are computed in `real time' are measured as of
+the first of the month after the bill was sponsored to reflect the state of the
+world after the initial cosponsorship network was formed. Our specific
+considered features are
+\begin{itemize}
+	\item number of terms served by sponsor
+	\item whether the sponsor is a chairman or ranking member of a standing committee
+	\item number of bills written by sponsor so far
+	\item number of bills cosponsored by sponsor so far
+	\item number of consponsorships received by sponsor so far
+\end{itemize}
+
+Finally, we introduce our network features gleaned directly from the constructed
+web of working relationships. We construct the network in `real time' for each
+bill, seeding it with the network from the prior Congress and keeping it up to
+date as of the bill's date so as to capture recent relationships and the
+situation for new Congressmembers. We view these relationships as the
+operationalization of the theory mentioned above that more visible legislators
+will succeed more often with their bills. Legislators with more useful working
+relationships with their peers may be more likely to get their bills prioritized
+and passed. It is useful to have more working relationships but it is also
+useful if those working relationships are with other influential members of
+Congress. Furthermore, it may be better if the early cosponsorship network has a
+diverse set of working relationships and don't cluster too tightly among
+themselves. These intuitions lead us to the following set of features
+\begin{itemize}
+	\item degree of sponsor
+	\item eigenvector centrality of sponsor
+	\item cut size of set of early cosponsors
+	\item clustering of early cosponsors
+	\item presence of early cosponsors in stable CESNA clusters
+\end{itemize}
