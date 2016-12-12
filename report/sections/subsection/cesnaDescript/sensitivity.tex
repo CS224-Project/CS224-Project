@@ -16,7 +16,7 @@ To combat all of these problems, we employ the following strategy to validate ou
 	\item Run CESNA to create 20 communities, the maximum of its default search space.
 	\item Repeatedly perturb the edges and features of the network (described below) and recompute 20 CESNA communities for each perturbation.
 	\item Use the Hungarian matching algorithm (described below) to pair up the communities in the original and each perturbed graph and compute the Jaccard similarity score associated with each pair.
-	\item Prune the original clusters that changed too much (i.e. had average similarity scores under \textbf{FILL IN CUTOFF}).
+	\item Prune the original clusters that changed too much (i.e. dipped below a similarity score of 2/3 more than 20\% of the time).
 \end{itemize}
 
 The remaining clusters have proven stable to numerous minor alterations in the
@@ -68,6 +68,14 @@ original cluster $i$ and perturbed cluster $j$ is the Jaccard similarity
 
 Upon finding the perfect matching, we assign each original cluster the weight of
 its edge in the perfect matching; that is, the Jaccard overlap with its similar
-cluster in the perturbed results. We can then average the similarity score of
-each original cluster across 100 perturbations to get a stability score, which
-we use to make our pruning decisions.
+cluster in the perturbed results. We can then calculate how often the similarity
+score dips below 2/3 across 100 perturbations to get a stability score, which we
+use to make our pruning decisions.
+
+\textbf{Resulting Clusters}
+
+\includegraphics[width=0.4\textwidth]{charts/num_stab_coms.png}
+
+From our original 20 communities, we end up pretty consistently with 5-10 stable communities in the House. The Senate is much more variable, seeing a high of 16 stable communities in the 99th Congress and a low of 0 in the 103rd. This last result is worrying but came admidst a term of low legislative activity and is an isolated occurrence. More generally, it maeks sense to expect more variance in Senate clustering due to the lower number of individuals.
+
+The resulting communities are quite healthy in terms of size as well. For both the House and the Senate, clusters have on average about 5\% of the body, which corresponds to around 20-25 members in the House and 5 members in the Senate. The largest communities have fewer than 50 representatives and 20 Senators while the smallest have around 10 Representatives and 4 Senators. As a result, it's clear that we are pickign up genuine working groups rather than having a rogue cluster with half of the body or a bunch of tiny 2-3 person clusters.
