@@ -135,7 +135,7 @@ is evidence that each regime is providing joint importance in our model.
 
 \textbf{Variable Importance}
 
-We note from the prior subsection that most of the network features are some of
+We note from the prior subsection that many of the network features are among
 the most important features in the each logistic regression model, followed by
 ideology. However, we are unsure if we can trust these results due to the
 liklihood of strong colinearity between our features (for example, our network
@@ -144,7 +144,7 @@ features) and strong interaction effects. As such, we investigated a model that
 is robust to colinearity and can model interaction effects. We chose to use a
 boosted tree model.
 
-We fit a boosted tree model separately for each chamber and year of congress. We
+We fit a boosted tree model separately for each chamber and year of Congress. We
 examined the variable importance for each model and plotted the rank of each
 feature's importance as it changes over time. We wished to see if certain
 features became more or less important over time.
@@ -162,8 +162,8 @@ two.
 \includegraphics[width=0.4\textwidth]{charts/cesnaImport.png}
 
 Notice that these features are more or less stable in terms of importance over
-the years. This implies that those features that were important during the
-$94^{th}$ congress remain important even to the $109^{th}$ congress. This story
+the years. This implies that the features that were important during the
+$94^{th}$ Congress remain important even to the $109^{th}$ Congress. This story
 appears to be the same for most features. Most features rarely change importance
 significantly.
 
