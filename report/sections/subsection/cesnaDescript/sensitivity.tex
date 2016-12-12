@@ -23,59 +23,75 @@ The remaining clusters have proven stable to numerous minor alterations in the
 graph and so are more likely to represent robust communities of working
 relationships.
 
+\textbf{Feature Perturbations}
+
+Our CESNA variables are all discrete despite the underlying variables being
+continuous (e.g. age is bucketed into 10 year discrete time intervals). We
+decided to directly perturb the CESNA variables directly rather than the
+underlying variables. This is because we wanted more control over when a CESNA
+feature would change, rather than tweaking noise variables when perturbing
+continuous features.
+
+We perturbed all features simultaneously. We designed our perturbation analysis
+for features such that each individual would have approximately 5\% total of at
+least changing one of their CESNA features. This corresponds to changing each
+individual's feature with approximately 0.5\% probability. We deemed this
+perturbation strategy appropriate because clusters robust to this tolerance of
+change are likely to be stable. After perturbation, we will rerun CESNA and
+develop perturbed communities.
+
+Given two sets of clusters, the original and the perturbed, we wish to find a
+1-to-1 matching such that the most similar clusters are paired up. The way we
+use this is with the Hungarian Matching algorithm~\cite{Munkres}, which can be
+used to find a maximum weight perfect matching on a complete bipartite graph.
+Here, the nodes in the graph are the two sets of clusters and the weight on the
+edge between original cluster $i$ and perturbed cluster $j$ is the Jaccard
+similarity (intersection over union) between $i$ and $j$. Upon finding the
+perfect matching, we assign each original cluster the weight of its edge in the
+perfect matching; that is, the Jaccard overlap with its similar cluster in the
+perturbed results.
+
 \textbf{Edge Perturbations}
-[HENRY - FIX THIS SECTION]
-\textit{For each community in a given Congress, we will detect how robust it is to edge 
-deletions. That is, for each edge within a community, we will randomly delete 
+
+CESNA community creation also relies on the edges of the underlying graph. We
+will check community robustness by adding and deleting edges in the graph for
+each Congress. That is, for each edge and potential edge within a congress, we
+will randomly delete or add an edges between legislators. We want the
+probability of perturbation to be on the same order as our feature perturbation.
+As such, we computed that approximately using a probability of 0.025\% to add or
+delete an edge will give us approximately a 5\% chance of affecting any given
+legislator.
+
+After rerunning CESNA on the perturbed graph, we develop a similarity score in
+the same manner as we did under feature perturbation
+
 them it with varying probability and rerun CESNA to see how the resulting 
 communities compare to the original. We will use Jaccard similarity between 
 communities to define how similar communities are. A robust community will be 
 one that maintains a high Jaccard similarity with reasonably low probability of 
 random edge deletion. Communities that completely dissolve with small edge 
-probability of edge deletions will be deemed Unstable.}
-
-\textbf{Feature Perturbations}
-[HENRY - FIX THIS SECTION]
-\textit{CESNA Only takes in discrete features. However, some of the underlying features 
-(e.g. age and ideology) are really discretized continuous variables. As such, 
-our perturbation strategy for variable perturbation depends on the type of 
-variable.}
-
-\textit{For underlying continuous variables, we will add random normal noise to the
-variables. The average noise will be proportional to that feature's sample
-average. We will vary the standard deviation for sensitivity purposes. After
-perturbations, we will measure the community's stability by computing the
-Jaccard similarity for each community. Again, communities with low Jaccard
-similarities will be considered unstable, and we will then reduce the number of
-communities that we detect.}
-
-\textit{For genuinely discrete variables (such as sex), we will employ a strategy
-similar to edge perturbations. Except, instead of randomly deleting edges, we
-will randomly switch features for all individuals within the cluster. We will
-use Jaccard similarity to gage how stable a community is, imputing that low 
-Jaccard similarity means an unstable community, thus necessitating lowering 
-the number of communities that we use.}
+probability of edge deletions will be deemed Unstable.
 
 \textbf{Cluster Similarity and Pruning}
 
-Given two sets of clusters, the original and the perturbed, we wish to find a
-1-to-1 matching such that the most similar clusters are paired up. The way we
-use this is with the Hungarian Matching algorithm, which can be used to find a
-maximum weight perfect matching on a complete bipartite graph. Here, the nodes
-in the graph are the two sets of clusters and the weight on the edge between
-original cluster $i$ and perturbed cluster $j$ is the Jaccard similarity
-(intersection over union) between $i$ and $j$.
+Our goal is to fit a large number of communities to our graphs and prune off
+communities that are not robust to perturbation. We fit $20$ communities, which
+is the default CESNA maximal range of communities.
 
-Upon finding the perfect matching, we assign each original cluster the weight of
-its edge in the perfect matching; that is, the Jaccard overlap with its similar
-cluster in the perturbed results. We can then calculate how often the similarity
-score dips below 2/3 across 100 perturbations to get a stability score, which we
-use to make our pruning decisions.
+A single perturbation simulation is a high variance measure of cluster
+stability.~\cite{Tzerpos} In order to lower variance, we employ a repeated
+perturbation strategy. We perturbed CESNA features and graph edges for $50$
+separate instances for each Congress. For each of the $100$ perturbations, we
+computed the community similarity to the unperturbed communities. We counted the
+number of times each community stayed about 2/3 similarity across each
+perturbation. If a community stayed above the 2/3 similarity threshold over at
+least 80 of the perturbations, we kept the community for analysis. Otherwise, we
+pruned the community.
 
 \textbf{Resulting Clusters}
 
 \includegraphics[width=0.4\textwidth]{charts/num_stab_coms.png}
 
-From our original 20 communities, we end up pretty consistently with 5-10 stable communities in the House. The Senate is much more variable, seeing a high of 16 stable communities in the 99th Congress and a low of 0 in the 103rd. This last result is worrying but came admidst a term of low legislative activity and is an isolated occurrence. More generally, it maeks sense to expect more variance in Senate clustering due to the lower number of individuals.
+From our original 20 communities, we end up pretty consistently with 5-10 stable communities in the House. The Senate is much more variable, seeing a high of 16 stable communities in the 99th Congress and a low of 0 in the 103rd. This last result is worrying but came amidst a term of low legislative activity and is an isolated occurrence. More generally, it makes sense to expect more variance in Senate clustering due to the lower number of individuals.
 
 The resulting communities are quite healthy in terms of size as well. For both the House and the Senate, clusters have on average about 5\% of the body, which corresponds to around 20-25 members in the House and 5 members in the Senate. The largest communities have fewer than 50 representatives and 20 Senators while the smallest have around 10 Representatives and 4 Senators. As a result, it's clear that we are pickign up genuine working groups rather than having a rogue cluster with half of the body or a bunch of tiny 2-3 person clusters.

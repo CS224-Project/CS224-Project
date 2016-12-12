@@ -3,14 +3,14 @@
 \subsection{Data Overview}
 
 Our primary source of data was aggregated by James Fowler~\cite{Fowler}. Fowler
-developed several disjoint of House and Senate social networks for the $93^{rd}$
+developed several datasets of House and Senate social networks for the $93^{rd}$
 through the $110^{th}$ Congress. His data contains the names and Interuniversity
-Consortium for Political and Social Research (ICPSR) Ids for all legislators for
-each congress, as well as the list of all bills, amendments, and resolutions
-instroduced and whether they passed. Importantly, he also has an indicator
-matrix of which legislator was a sponsor of a bill and which legislator was a
-cosponsor of a bill. With this, we know who sponsored and cosponsored each
-bills, and thus,  which legislators each individual Congressman cosponsored a
+Consortium for Political and Social Research (ICPSR) ids for all legislators for
+each Congress, as well as the list of all bills, amendments, and resolutions
+introduced and whether they passed. Importantly, he also has an indicator
+matrix of which legislator was a sponsor of a bill and which legislators were
+cosponsors of a bill. With this, we know who sponsored and cosponsored each
+bill, and thus, which legislators each individual Congressman has cosponsored a
 bill with.
 
 We supplement this data with additional information for each legislator. We get
@@ -22,6 +22,10 @@ the Congressional Record and CQ Press by Garrison Nelson, Charles Stewart, and
 Jonathan Woon~\cite{Nelson, Stewart}. To our knowledge, we are the first to
 combine this many sources of information about Congresspeople and their working
 relationships.
+
+The data from GovTrack had many missing identifiers for the $110^{th}$ Congress,
+which made joining data for this Congress impossible. Because of this, we
+omitted analysis for this congress.
 
 \subsection{Constructing the Network}
 
@@ -116,9 +120,9 @@ detailed list of changes, please refer to our github repository.
 
 \subsection{Change In Law}
 
-Starting with the $98^{th}$ Congress, a law passed which allowed a bill to have
+Starting with the $96^{th}$ Congress, a law passed which allowed a bill to have
 more than $25$ legislators cosponsor it at a time. As a result, legislators
 started to cosponsor more bills than usual. We can see this behavior manifest
-itself in the uptick in average network degrees in congresses after the
-$97^{th}$. As such, the behavior and the number of communities we receive from
-before the $98^{th}$ congress appear to be fundamentally different.
+itself in the uptick in average network degrees in Congresses after the
+$96^{th}$. As such, the behavior and the number of communities we receive from
+before the $96^{th}$ Congress appear to be fundamentally different.
