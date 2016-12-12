@@ -96,5 +96,6 @@ ENV/
 *.gz
 *.blg
 *.bbl
+*.pdf
 
 charts
