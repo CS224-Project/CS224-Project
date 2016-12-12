@@ -62,9 +62,6 @@ variables to be the important ones. In particular, we consider
 	\item ideology of sponsor
 	\item mean ideology of early cosponsors
 	\item variance of ideology of early cosponsors
-	\item regional diversity of early cosponsors
-	\item gender impurity of early cosponsors
-	\item variance in age of early cosponsors
 \end{itemize}
 
 The visibility features are meant to capture how prominent or well-known a
@@ -108,7 +105,67 @@ lead us to the following set of features
 
 \subsection{Variable Importance and Significance}
 
-\textbf{TO FILL IN}
+\textbf{Joint Variable Significance}
+
+To demonstrate that certain sets of variables were significant, we first
+developed a logistic regression model using all of our data across all
+congressional years, separately for the house and senate. We then used an F-test
+for each regime of variables outlined in our feature section (ie. visibility
+features, network features, demographic features) to see if in conjunction they
+are all significant predictors or not. The results of the F-tests are as follows:
+
+\begin{table}
+\centering
+   \begin{tabular}{llcc}
+   \toprule
+   Chamber & Vars & F-Statistic & p-value \\ \midrule
+   House & Demographic & 37.27 & 0.0 \\
+   House & Visibility & 150.93 & 0.0 \\
+   House & Network & 158.84 & 0.0 \\
+   Senate & Demographic & 54.93 & 0.0 \\
+   Senate & Visibility & 281.04 & 0.0 \\ 
+   Senate & Network & 35.89 & 0.0 \\ \bottomrule
+   \end{tabular}
+   \caption{F-Tests of variable significance on different subsets of data}
+   \label{table:perf}
+\end{table}
+
+As we can see, each regime of features is highly significant in our models. This
+is evidence that each regime is providing joint importance in our model.
+
+\textbf{Variable Importance}
+
+We note from the prior subsection that most of the network features are some of
+the most important features in the each logistic regression model, followed by
+ideology. However, we are unsure if we can trust these results due to the
+liklihood of strong colinearity between our features (for example, our network
+features are likely colinear since they approximately measure similar network
+features) and strong interaction effects. As such, we investigated a model that
+is robust to colinearity and can model interaction effects. We chose to use a
+boosted tree model.
+
+We fit a boosted tree model separately for each chamber and year of congress. We
+examined the variable importance for each model and plotted the rank of each
+feature's importance as it changes over time. We wished to see if certain
+features became more or less important over time.
+
+By far the most consistently important features were our ideology features,
+followed by network centrality measures and presence in CESNA communities. We
+show plots for ideology dimension 1 and eigen centrality, omitting other
+ideology and network measures. These other measures behave similarly to these
+two.
+
+\includegraphics[width=0.4\textwidth]{charts/idImport.png}
+
+\includegraphics[width=0.4\textwidth]{charts/EigImport.png}
+
+\includegraphics[width=0.4\textwidth]{charts/cesnaImport.png}
+
+Notice that these features are more or less stable in terms of importance over
+the years. This implies that those features that were important during the
+$94^{th}$ congress remain important even to the $109^{th}$ congress. This story
+appears to be the same for most features. Most features rarely change importance
+significantly.
 
 \subsection{Predictive Performance}
 
