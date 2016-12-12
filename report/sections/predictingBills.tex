@@ -7,33 +7,39 @@ is most likely to pass if its ideological content matches most closely the
 median ideology of legislators. A more sophisticated take would include the
 effects of party such as the level of support by the majority party and party
 leaders, who can exert control on which amendments or bills will come up for a
-vote.
+vote. Under this view of legislative activity, partisan polarization is a
+serious and potentially fatal roadblock to legislative compromise and
+productivity.
 
 But there are several reasons to believe that there are factors beyond just
-party and ideology (as defined by DW-NOMINATE) that would determine the success
-of a piece of legislation. For one, relatively few bills are passed relative the
-the amount introduced, so there is the question of which bills will be
-prioritized. Additionally, bills are often technical in nature without a major
-ideological component or are compromises between various factions. Finally,
-bills themselves might be subjects of larger compromises, in which legislators
-vote for each others' bills in what is known as `logrolling'~\cite{Schwartz}.
+party and ideology that would determine the success of a piece of legislation.
+For one, relatively few bills are passed relative the the amount introduced, so
+there is the question of which bills will be prioritized. Additionally, bills
+are often technical in nature without a major ideological component or are
+compromises between various factions. Finally, bills themselves might be
+subjects of larger compromises, in which legislators vote for each others' bills
+in what is known as `logrolling'~\cite{Schwartz}.
 
 Each of these factors can be influenced by considering the network of working
 relationships. Congresspeople with more numerous, important, and strategic
 relationships may be more likely to get the bills they write or cosponsor
-passed, even holding fixed party and ideology variables.
+passed, even holding fixed party and ideology variables. If working
+relationships remain important to the success of a bill, beyond its ideological
+content and even as the parties have moved further apart, that suggests that
+there is still a role for compromise and negotiation.
 
-In many ways, this is similar to the question of community growth in the network
-literature. The success of a bill is analagous to the spreading of the early
-community formed by the early cosponsors to cover a majority of Congress.
-Backstrom et al.~\cite{Backstrom} identify several features of early networks
-that they see as important for growth. In particular, they find a lot of
-significance in the number of nodes that have edges to someone in the early
-network, which they call the `fringe'. Additionally, they look at features
-related to clustering in the early network, such as the ratio of closed to open
-triads which is negatively correlated with growth. Finally, they look at the
-`activity' of the initial group, which in our context might include the
-legislative productivity of the early cosponsor networks.
+In many ways, the question of what makes bill passage more likely is similar to
+the question of community growth in the network literature. The success of a
+bill is analagous to the spreading of the early community formed by the early
+cosponsors to cover a majority of Congress. Backstrom et al.~\cite{Backstrom}
+identify several features of early networks that they see as important for
+growth. In particular, they find a lot of significance in the number of nodes
+that have edges to someone in the early network, which they call the `fringe'.
+Additionally, they look at features related to clustering in the early network,
+such as the ratio of closed to open triads which is negatively correlated with
+growth. Finally, they look at the `activity' of the initial group, which in our
+context might include the legislative productivity of the early cosponsor
+networks.
 
 \subsection{Features}
 
@@ -85,12 +91,13 @@ date as of the bill's date so as to capture recent relationships and the
 situation for new Congressmembers. We view these relationships as the
 operationalization of the theory mentioned above that more visible legislators
 will succeed more often with their bills. Legislators with more useful working
-relationships with their peers may be more likely to get their bills prioritized
-and passed. It is useful to have more working relationships but it is also
-useful if those working relationships are with other influential members of
-Congress. Furthermore, it may be better if the early cosponsorship network has a
-diverse set of working relationships and don't cluster too tightly among
-themselves. These intuitions lead us to the following set of features
+relationships with their peers may be more likely to get their bills taken
+seriously as good-faith legislative efforts, prioritized, and passed. It is
+useful to have more working relationships but it is also useful if those working
+relationships are with other influential members of Congress. Furthermore, it
+may be better if the early cosponsorship network has a diverse set of working
+relationships and don't cluster too tightly among themselves. These intuitions
+lead us to the following set of features
 \begin{itemize}
 	\item degree of sponsor
 	\item eigenvector centrality of sponsor
@@ -98,3 +105,29 @@ themselves. These intuitions lead us to the following set of features
 	\item clustering of early cosponsors
 	\item presence of early cosponsors in stable CESNA clusters
 \end{itemize}
+
+\subsection{Variable Importance and Significance}
+
+\textbf{TO FILL IN}
+
+\subsection{Predictive Performance}
+
+Predictive models in both the House and the Senate bore out the finding above that network features are important to predicting bill success. Interestingly, crude approximations of working relationships like the number of cosponsorships given out and the number of cosponsorships received (contained in the `visibility' section) did not meaningfully add predictive power. It was only when considering variables related to our network of actual working relationships that a boost was received above and beyond ideology and demographic variables alone.
+
+\begin{table}
+\centering
+   \begin{tabular}{llcc}
+   \toprule
+   Chamber & Vars & F1 Score & Log Loss \\ \midrule
+   House & Demographic & 0.062 & 0.487 \\
+   House & D + Visibility & 0.063 & 0.480 \\
+   House & D + V + Network & 0.090 & 0.470 \\
+   Senate & Demographic & 0.585 & 0.524 \\
+   Senate & D + Visibility & 0.573 & 0.523 \\ 
+   Senate & D + V + Network & 0.627 & 0.512 \\ \bottomrule
+   \end{tabular}
+   \caption{Model performance on different subsets of data}
+   \label{table:perf}
+\end{table}
+
+The F1 score, a weighted average of precision and recall, depends on the actual 0-1 predictions. As a result, it is more jumpy. Adding visibility variables makes essentially no impact as few predictions flipped, even if predicted probabilities changed. Meanwhile, adding the network moved enough predicted probabilities across the 50\% threshold, leading to sharply improved F1. On the other hand, log loss, which steadily rewards more accurate probabilistic predictions, shows smaller but still substantial gains to adding network features.
